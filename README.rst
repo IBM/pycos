@@ -1,3 +1,6 @@
+|travis-badge|
+
+.. |travis-badge| image:: https://travis-ci.com/IBM/pycos.svg?branch=master
 
 =====
 pycos
