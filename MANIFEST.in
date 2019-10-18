@@ -1,0 +1,12 @@
+# This file dictates what goes into a sdist tarball.
+
+# Include the README
+include README.rst
+
+# Include the license file
+include LICENSE.txt
+
+recursive-include *.py
+
+global-exclude .git*
+global-exclude *.pyc
