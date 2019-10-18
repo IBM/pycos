@@ -3,13 +3,13 @@
 pycos
 =====
 
-Wrapper package around ``ibm_botd3`` to provide basic read/write capibility
+Wrapper package around ``ibm_boto3`` to provide basic read/write capability
 into cloud object store.
 
-Prereq to run example/example.py,
+Prerequisites
 ---------------------------------
 
-- json credentials file, (from the IBM Cloud Object Store dashboard, *service credentials -> new credentials*). It takes the form
+- Credentials to your instance of IBM Cloud Object Store. These are available from the IBM Cloud Object Store dashboard, *service credentials -> new credentials*. It takes the form:
 
 .. code-block::
 
@@ -27,24 +27,25 @@ Prereq to run example/example.py,
     "resource_instance_id": ""
   }
 
-- region specifer eg ``us-south``, ``eu-de`` ...
-- pycos package installed. this can be installed either by
+- Region specifer (which region you are using) eg ``us-south``, ``eu-de`` ...
+- This pycos package available locally, which can be installed either by:
 
   - ``python3 -m pip install --user git+https://github.com/IBM/pycos``
   - clone this repo,
 
-    - ``python3 setup.py sdist``
+    - ``python3 setup.py sdist`` followed by
     - ``python3 -m pip install --user dist/pycos-0.0.1.tar.gz``
 
 
-to run ``example/example.py``
+Running the sample code`
 -----------------------------
 
-copy credentials into ``config.json`` and add the following line, ``"endpoint" : "https://s3.eu-de.cloud-object-storage.appdomain.cloud"``
-giving,
+Copy the credentials (as described above) into ``example/config.json`` and add the following line, ``"endpoint" : "https://s3.eu-de.cloud-object-storage.appdomain.cloud"``
+(assuming the region is eu-de).
 
 .. code-block::
 
+  cd example
   cat config.json
   {
     "apikey": "xxx",
@@ -60,5 +61,15 @@ giving,
     "resource_instance_id": "xxx",
     "endpoint" : "https://s3.eu-de.cloud-object-storage.appdomain.cloud"
   }
-  cd example
   python3 example.py
+
+
+Running the unit tests
+-----------------------------
+
+Copy the ``example/config.json`` file to the ``tests`` directory and run:
+
+.. code-block::
+
+  cd tests
+  pytest test_pycos.py
