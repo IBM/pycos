@@ -182,3 +182,30 @@ class COSWriter(COS):
             ExtraArgs=extra_args,
             Callback=callback,
             Config=config)
+
+
+class COSPresignedURL():
+    '''COSPresignedURL
+
+    '''
+    def __init__(self, hmac_key, hmac_secret, endpoint):
+        cfg = Config(signature_version='s3v4')
+        self.cos = ibm_boto3.client(
+            's3',
+            aws_access_key_id=hmac_key,
+            aws_secret_access_key=hmac_secret,
+            endpoint_url=endpoint,
+            config=cfg)
+
+    def create_post(self, bucket, key, expires_in=300):
+        '''create_post
+
+        '''
+        return self.cos.generate_presigned_post(bucket, key, ExpiresIn=expires_in)
+
+    def create_get(self, bucket, key, expires_in=300):
+        '''create_get
+
+        '''
+        params = {'Bucket':bucket, 'Key': key}
+        return self.cos.generate_presigned_url('get_object', Params=params, ExpiresIn=expires_in)
